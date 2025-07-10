@@ -1,18 +1,26 @@
-/**
- * Створюємо доступ до елементів
- * Вішаємо слухачів подій 
- */
-const textereaEl = document.querySelector('texterea');
-const formL = document.querySelector('.js-');
-
-textArea.addEventListener('input', onTextAreaInput);
-formL.addEventListener('submit', onSubmit);
-/*
- * - Отримуємо значення поля
- * - Зберігаємо його у сховищі
- * - Можно додати throttle
- */
-function onTextAreaInput(event){
-    const TextAreaResult = textArea.value;
-    localStorage.setItem('TextAreaResult', TextAreaResult)
+const formEl = document.querySelector('#contactsForm')
+const contactsList = document.querySelector('#contactsList')
+formEl.addEventListener('submit', handleSubmit)
+function handleSubmit(event) {
+    event.preventDefault();
+    const newClient = {
+        name:event.currentTarget.elements.name.value,
+        telNum: event.currentTarget.elements.name.value
+    }
+    contactsList.insertAdjacentHTML('beforeend', createContactMarkup(newClient))
+    localStorage.setItem("contact", JSON.stringify(newClient))
+    console.log(event);
 }
+
+function createContactMarkup(newCont) {
+    return `
+    <li>
+    <p>${newCont.name}</p>
+    <p>${newCont.number}</p>
+    </li>
+    `
+}
+function renderContact(contacts) {
+
+}
+function getContactsFromLocalStorage(key) { }
